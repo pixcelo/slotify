@@ -22,7 +22,7 @@ if (isset($_POST['registerButton'])) {
   $password2 = sanitizeFormPassword($_POST['password2']);
 
   // register.phpでincludeした状態でnew（インスタンス化）しているのでAcountクラスのメソッドが使える
-  $wasSuccessful  = $account->register($username, $firstName, $email, $email2, $password, $password2);
+  $wasSuccessful  = $account->register($username, $firstName, $lastName, $email, $email2, $password, $password2);
 
   if ($wasSuccessful) {
       header('Location: index.php');

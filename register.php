@@ -1,5 +1,7 @@
 <?php
+  ini_set('display_errors',1);
   include('includes/classes/Account.php');
+  include('includes/classes/Constants.php');
 
   $account = new Account();
 
@@ -34,18 +36,24 @@
     <form id="registerForm" action="register.php" method="POST">
       <h2>アカウント新規作成</h2>
       <p>
+      <!-- エラーがあればAccountクラスのエラーメッセージを表示する -->
+      <?php echo $account->getError(Constants::$userNameCharacters); ?>
       <label for="username">ユーザーネーム</label>
         <input id="username" name="username" type="text" placeholder="たっくん" required>
       </p>
       <p>
+      <?php echo $account->getError(Constants::$firstNameCharacters); ?>
       <label for="firstName">名前</label>
         <input id="firstName" name="firstName" type="text" placeholder="太郎" required>
       </p>
       <p>
+      <?php echo $account->getError(Constants::$lastNameCharacters); ?>
       <label for="lastName">性別</label>
         <input id="lastName" name="lastName" type="text" placeholder="田中" required>
       </p>
       <p>
+      <?php echo $account->getError(Constants::$emailsDoNotMatch); ?>
+      <?php echo $account->getError(Constants::$emailInvalid); ?>
       <label for="email">メールアドレス</label>
         <input id="email" name="email" type="email" placeholder="test@test.com" required>
       </p>
@@ -53,8 +61,10 @@
       <label for="email2">メールアドレス確認用</label>
         <input id="email2" name="email2" type="email" placeholder="test@test.com" required>
       </p>
-
       <p>
+        <?php echo $account->getError(Constants::$passwordsDoNomatch); ?>
+        <?php echo $account->getError(Constants::$passwordsNotAlphanumeric); ?>
+        <?php echo $account->getError(Constants::$passwordsCharacters); ?>
         <label for="password">パスワード</label>
         <input id="password" name="password" type="password" placeholder="パスワード" required>
       </p>
