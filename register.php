@@ -44,6 +44,11 @@
             </p>
 
             <button type="submit" name="loginButton">ログイン</button>
+
+            <div class="hasAccountText">
+              <span id="hideLogin">アカウント登録はこちら</span>
+            </div>
+
           </form>
 
           <form id="registerForm" action="register.php" method="POST">
@@ -89,6 +94,11 @@
             </p>
 
             <button type="submit" name="registerButton">登録</button>
+
+            <div class="hasAccountText">
+              <span id="hideregister">ログインはこちら</span>
+            </div>
+
           </form>
 
         </div><!-- id="inputContainer" -->
