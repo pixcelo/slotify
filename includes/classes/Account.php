@@ -33,6 +33,19 @@
       // echo "test";
     }
 
+    public function login($un, $pw) {
+        $pw = md5($pw);
+        $query = mysqli_query($this->con, "SELECT * FROM users WHERE username='$un' AND password='$pw'");
+
+        if (mysqli_num_rows($query) == 1) {
+          return true;
+        } else {
+          array_push($this->errorArray, Constants::$loginFailed);
+          return false;
+        }
+    }
+
+    // アカウント登録：データベースへの挿入
     private function insertUserDetails($un, $fn, $ln, $em, $pw) {
         $encryptedPw = md5($pw);
         $profilePic = "assets/images/profile-pics/head_emerald.png";

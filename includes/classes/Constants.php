@@ -11,6 +11,8 @@ Class Constants {
     public static $firstNameCharacters = "名前は2〜5文字の間で設定してください。";
     public static $userNameCharacters = "ユーザーネームは5〜25文字の間で設定してください。";
     public static $usernameTaken = "このユーザーネームはすでに使用されています。";
+
+    public static $loginFailed = "ユーザーネームかパスワードが間違っています。";
     
 }
 ?>
