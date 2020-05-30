@@ -46,6 +46,7 @@
       <p>
       <!-- エラーがあればAccountクラスのエラーメッセージを表示する -->
       <?php echo $account->getError(Constants::$userNameCharacters); ?>
+      <?php echo $account->getError(Constants::$usernameTaken); ?>
       <label for="username">ユーザーネーム</label>
         <input id="username" name="username" type="text" placeholder="たっくん" value="<?php getInputValue('username') ?>" required>
       </p>
@@ -62,6 +63,7 @@
       <p>
       <?php echo $account->getError(Constants::$emailsDoNotMatch); ?>
       <?php echo $account->getError(Constants::$emailInvalid); ?>
+      <?php echo $account->getError(Constants::$emailTaken); ?>
       <label for="email">メールアドレス</label>
         <input id="email" name="email" type="email" placeholder="test@test.com" value="<?php getInputValue('email') ?>" required>
       </p>

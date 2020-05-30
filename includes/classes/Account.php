@@ -48,6 +48,11 @@
           return;
       }
 
+      // ユーザーネームの重複チェック
+      $checkUsernameQuery = mysqli_query($this->con, "SELECT username FROM users WHERE username='$un'");
+      if (mysqli_num_rows($checkUsernameQuery) != 0 ) {
+        array_push($this->errorArray, Constants::$usernameTaken);
+      }
     }
     
     private function validateFirstname($fn) {
@@ -75,6 +80,11 @@
       if (!filter_var($em, FILTER_VALIDATE_EMAIL)) {
           array_push($this->errorArray, Constants::$emailInvalid);
           return;
+      }
+
+      $checkEmailQuery = mysqli_query($this->con, "SELECT email FROM users WHERE email='$em'");
+      if (mysqli_num_rows($checkEmailQuery) != 0 ) {
+        array_push($this->errorArray, Constants::$emailTaken);
       }
     }
     
