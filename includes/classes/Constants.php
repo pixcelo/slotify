@@ -1,6 +1,7 @@
 <?php
 Class Constants {
-  
+    
+    // アカウント登録
     public static $passwordsDoNomatch = "パスワードが一致していません。";
     public static $passwordsNotAlphanumeric = "パスワードは文字や数字で入力してください。";
     public static $passwordsCharacters = "パスワードは5〜30文字の間で設定してください。";
@@ -12,6 +13,7 @@ Class Constants {
     public static $userNameCharacters = "ユーザーネームは5〜25文字の間で設定してください。";
     public static $usernameTaken = "このユーザーネームはすでに使用されています。";
 
+    // ログイン
     public static $loginFailed = "ユーザーネームかパスワードが間違っています。";
     
 }

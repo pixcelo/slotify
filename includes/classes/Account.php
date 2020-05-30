@@ -33,6 +33,7 @@
       // echo "test";
     }
 
+    // ログイン処理：ユーザーネームとパスワード判定
     public function login($un, $pw) {
         $pw = md5($pw);
         $query = mysqli_query($this->con, "SELECT * FROM users WHERE username='$un' AND password='$pw'");
@@ -55,6 +56,7 @@
         return $result;
     }
 
+    // 入力項目のバリデーション
     private function validateUsername($un) {
       if (mb_strlen($un) > 25 || mb_strlen($un) < 5) {
           array_push($this->errorArray, Constants::$userNameCharacters);
