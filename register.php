@@ -24,6 +24,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>slotify</title>
   <link rel="stylesheet" href="assets/css/register.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="assets/js/register.js"></script>
 </head>
 <body>
   <div id="background">
@@ -46,7 +48,7 @@
             <button type="submit" name="loginButton">ログイン</button>
 
             <div class="hasAccountText">
-              <span id="hideLogin">アカウント登録はこちら</span>
+              <span class="hideLogin">アカウント登録はこちら</span>
             </div>
 
           </form>
@@ -96,7 +98,7 @@
             <button type="submit" name="registerButton">登録</button>
 
             <div class="hasAccountText">
-              <span id="hideregister">ログインはこちら</span>
+              <span class="hideRegister">ログインはこちら</span>
             </div>
 
           </form>
