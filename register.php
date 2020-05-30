@@ -28,6 +28,28 @@
   <script src="assets/js/register.js"></script>
 </head>
 <body>
+
+  <?php
+  // 通常はloginForm画面を表示
+  // 登録ボタンをPOSTしてエラーならregisterFormを表示
+  // 登録ボタンをPOSTして成功すればログインしてindex.phpに遷移
+  if(isset($_POST['registerButton'])) {
+    echo '<script>
+            $(document).ready(function() {
+                $("#loginForm").hide();
+                $("#registerForm").show();
+            });
+          </script>';
+  } else {
+    echo '<script>
+            $(document).ready(function() {
+                $("#loginForm").show();
+                $("#registerForm").hide();
+            });
+          </script>';
+  }
+  ?>
+
   <div id="background">
 
     <div id="loginContainer">
