@@ -22,13 +22,25 @@ if (isset($_SESSION['userLoggedIn'])) {
 </head>
 <body>
 
-    <div id="nowPlayingBarContainer">
+  <div id="mainContainer">
+      <div id="topContainer">
 
+        <div id="navBarContainer">
+          <nav class="navBar">
+            <a href="index.php" class="logo">
+                <img src="assets/images/icons/logo.png" alt="">
+            </a>
+
+          </nav>
+        </div>
+
+      </div>
+
+      <div id="nowPlayingBarContainer">
         <div id="nowPlayingBar">
 
           <div id="nowPlayingLeft">
             <div class="content">
-
               <span class="albumLink">
                   <img src="assets/images/unnamed.png" alt="" class="albumArtwork">
               </span>
@@ -98,10 +110,24 @@ if (isset($_SESSION['userLoggedIn'])) {
           </div>
 
           <div id="nowPlayingRight">
+              <div class="volumeBar">
 
+                <button class="controlButton volume" title="Volume Button">
+                    <img src="assets/images/icons/volume.png" alt="Volume">
+                </button>
+
+                <div class="progressBar">
+                      <div class="progressBarBg">
+                          <div class="progress"></div>
+                      </div>
+                </div>
+              </div>
           </div>
 
         </div>
-    </div>
+      </div>
+
+  </div>
+
 </body>
 </html>
