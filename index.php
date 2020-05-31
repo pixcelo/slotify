@@ -2,7 +2,6 @@
 include('includes/config.php');
 
 
-
 // ログイン処理を実行してindex.phpに訪問した場合のみ$_SESSION['userLoggedIn']が渡ってくる
 if (isset($_SESSION['userLoggedIn'])) {
     $userLoggedIn = $_SESSION['userLoggedIn'];
@@ -19,8 +18,25 @@ if (isset($_SESSION['userLoggedIn'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>welcome to Slotify!</title>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  hello!
+    <div id="nowPlayingBarContainer">
+        <div id="nowPlayingBar">
+
+          <div id="nowPlayingLeft">
+            
+          </div>
+
+          <div id="nowPlayingCenter">
+            
+          </div>
+
+          <div id="nowPlayingRight">
+
+          </div>
+
+        </div>
+    </div>
 </body>
 </html>
