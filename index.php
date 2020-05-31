@@ -21,11 +21,31 @@ if (isset($_SESSION['userLoggedIn'])) {
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+
     <div id="nowPlayingBarContainer">
+
         <div id="nowPlayingBar">
 
           <div id="nowPlayingLeft">
-            
+            <div class="content">
+
+              <span class="albumLink">
+                  <img src="assets/images/unnamed.png" alt="" class="albumArtwork">
+              </span>
+
+              <div class="trackInfo">
+                <span class="trackName">
+                  <span>happy</span>
+                </span>
+
+                <span class="artistName">
+                  <span>reeec kenny</span>
+                </span>
+              </div>
+
+            </div>
+
+
           </div>
 
           <div id="nowPlayingCenter">
