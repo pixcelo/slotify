@@ -1,6 +1,4 @@
-<?php
-include("includes/header.php"); 
-include("includes/classes/Artist.php"); 
+<?php include("includes/header.php"); 
 
 if(isset($_GET['id'])) {
     $albumId =  $_GET['id'];
@@ -9,19 +7,29 @@ else {
     header("Location: index.php");
 }
 
-$albumQuery = mysqli_query($con, "SELECT * FROM albums WHERE id='$albumId'");
-$album = mysqli_fetch_array($albumQuery);
+// classes/Album.phpクラスをインスタンス化
+$album = new Album($con, $albumId);
 
-// classes/Artist.phpクラスをインスタンス化
-$artist = new Artist($con, $album['artist']);
+$artist = $album->getArtist();
 
-echo $album['title'] . "<br>";
-
-// Artist.phpクラスのメソッド
-echo $artist->getName();
+// 各クラスのメソッドを呼び出し
+// echo $album->getTitle() . "<br>";
+// echo $artist->getName();
 
 ?>
 
+<div class="entityInfo">
+    <div class="leftSection">
+      <img src="<?php echo $album->getArtworkPath(); ?>" alt="Artwork">
+    </div>
+
+    <div class="rightSection">
+      <h2><?php echo $album->getTitle(); ?></h2>
+      <p>By <?php echo $artist->getName(); ?></p>
+      <p> <?php echo $album->getNumberOfSongs(); ?> songs</p>
+    </div>
+
+</div>
 
 
 

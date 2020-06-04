@@ -1,5 +1,7 @@
 <?php 
 include('includes/config.php');
+include('includes/classes/Artist.php');
+include('includes/classes/Album.php'); // AlbumクラスでArtistクラスをnewしているのでArtistクラスの下でincludeする
 
 
 // ログイン処理を実行してindex.phpに訪問した場合のみ$_SESSION['userLoggedIn']が渡ってくる
@@ -31,5 +33,5 @@ if (isset($_SESSION['userLoggedIn'])) {
             <div id="mainContent">
 
 
-            
+
             </div>
