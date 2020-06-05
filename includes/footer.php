@@ -2,7 +2,7 @@
 
       </div>
 
-      <?php include("includes/nowPlayingBarContainer.php"); ?>
+      <?php include("includes/nowPlayingBar.php"); ?>
 
   </div>
 
