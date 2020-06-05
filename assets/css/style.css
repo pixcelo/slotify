@@ -171,12 +171,12 @@ body {
     -ms-flex-direction: column;
 }
 
-.logo img {
-    width: 32px;
-}
-
 .logo {
     margin-bottom: 15px;
+}
+
+.logo img {
+    width: 32px;
 }
 
 .navBar .group {
@@ -205,9 +205,6 @@ body {
 
 .navItemLink .icon {
     position: absolute;
-    right: 0;
-    top: 6px;
-    width: 25px;position: absolute;
     right: 0;
     top: 6px;
     width: 25px;
@@ -285,4 +282,84 @@ body {
 .entityInfo .rightSection p {
     color: #939393;
     font-weight: 200;
+}
+
+.trackList {
+    padding: 0;
+}
+
+.trackListRow {
+    height: 40px;
+    padding: 15px 10px;
+    list-style: none;
+}
+
+.trackListRow span {
+    color: #939393;
+    font-weight: 200;
+}
+
+.trackListRow:hover {
+    background-color: #282828;
+}
+
+.trackListRow .trackCount {
+    width: 8%;
+    float: left;
+}
+
+.trackListRow .trackCount img {
+    width: 20px;
+    /* ホバー時にbisibleにする */
+    visibility: hidden;
+    position: absolute;
+    cursor: pointer;
+}
+
+.trackListRow:hover .trackCount img {
+    visibility: visible;
+}
+
+.trackListRow .trackCount span {
+    visibility: visible;
+}
+
+.trackListRow:hover .trackCount span {
+    visibility: hidden;
+}
+
+.trackListRow .trackInfo {
+    width: 75%;
+    float: left;
+}
+
+.trackListRow .trackInfo span {
+    display: block;
+}
+
+.trackListRow .trackOptions {
+    width: 5%;
+    float: left;
+    text-align: right;
+}
+
+.trackListRow .trackOptions img {
+    width: 15px;
+    visibility: hidden;
+}
+
+.trackListRow:hover .trackOptions img {
+    width: 15px;
+    visibility: visible;
+}
+
+.trackListRow .trackDuration {
+    width: 12%;
+    float: left;
+    text-align: right;
+}
+
+.trackListRow .trackInfo .trackName {
+    color: #fff;
+    margin-bottom: 7px;
 }
