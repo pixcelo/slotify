@@ -76,6 +76,13 @@ $jsonArray = json_encode($resultArray);
 
   // 次の曲を再生
   function nextSong() {
+
+      if (repeat) {
+          audioElement.setTime(0);
+          playSong();
+          return;
+      }
+
       // インデックスが最後なら先頭（0）に戻す
       if (currentIndex == currentPlaylist.length - 1) {
           currentIndex = 0;
@@ -88,17 +95,23 @@ $jsonArray = json_encode($resultArray);
       // console.log(trackToplay);
   }
 
+  // リピート再生のオン・オフ
+  function setRepeat() {
+      repeat = !repeat; // デフォルトはfalse
+      let imageName = repeat ? "repeat-active.png" : "repeat.png";
+      $(".controlButton.repeat img").attr("src", "assets/images/icons/" + imageName);
+  }
+
   // arguments(songId, song, true or false) trueで音楽再生
   function setTrack(trackId, newPlaylist, play) {
+
+    currentIndex = currentPlaylist.indexOf(trackId);
+    pauseSong();
     
     // ajax getSongJson.phpの内容(JSONデータ)が引数dataに入る
     $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
 
-        currentIndex = currentPlaylist.indexOf(trackId);
-
-        // console.log(data);
         let track = JSON.parse(data);
-        // console.log(track);
         
         // JSONデータのtitleをtrackNameに表示
         $(".trackName span").text(track.title);
@@ -192,11 +205,11 @@ $jsonArray = json_encode($resultArray);
                 <img src="assets/images/icons/pause.png" alt="Pause">
               </button>
 
-              <button class="controlButton next" title="Next button">
+              <button class="controlButton next" title="Next button" onclick="nextSong()">
                 <img src="assets/images/icons/next.png" alt="next">
               </button>
 
-              <button class="controlButton repeat" title="Repeat button">
+              <button class="controlButton repeat" title="Repeat button" onclick="setRepeat()">
                 <img src="assets/images/icons/repeat.png" alt="Repeat">
               </button>
 
