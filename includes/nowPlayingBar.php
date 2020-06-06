@@ -4,7 +4,7 @@ $songQuery = mysqli_query($con, "SELECT id FROM songs ORDER BY RAND() LIMIT 10")
 $resultArray = array();
 
 while($row = mysqli_fetch_array($songQuery)) {
-  array_push($resultArray, $row['id']);
+    array_push($resultArray, $row['id']);
 }
 
 // 配列にidを格納してJSON形式にエンコード
@@ -21,7 +21,16 @@ $jsonArray = json_encode($resultArray);
 
   // arguments(songId, song, true or false) trueで音楽再生
   function setTrack(trackId, newPlaylist, play) {
-      audioElement.setTrack("assets/music/bensound-acousticbreeze.mp3");
+    
+    // ajax getSongJson.phpの内容(JSONデータ)が引数dataに入る
+    $.post("includes/handlers/ajax/getSongJson.php", { songId : trackId }, function(data) {
+
+        // console.log(data);
+        let track = JSON.parse(data);
+        // console.log(track);
+        audioElement.setTrack(track.path);
+        audioElement.play();
+    });
 
       if (play) {
         audioElement.play();
@@ -41,6 +50,7 @@ $jsonArray = json_encode($resultArray);
   }
 
 </script>
+
 
 <div id="nowPlayingBarContainer">
   <div id="nowPlayingBar">
