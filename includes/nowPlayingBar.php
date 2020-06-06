@@ -13,11 +13,37 @@ $jsonArray = json_encode($resultArray);
 
 <script>
 
+  // プログレスバーのマウス操作
   $(document).ready(function() {
       currentPlaylist = <?php echo $jsonArray; ?>;
       audioElement = new Audio(); // from script.js
       setTrack(currentPlaylist[0], currentPlaylist, false);
+
+      $(".playbackBar .progressBar").mousedown(function() {
+          mouseDown = true;
+      });
+
+      $(".playbackBar .progressBar").mousemove(function(e) {
+          if(mouseDown) {
+              timeFormOffset(e, this);
+          }
+      });
+
+      $(".playbackBar .progressBar").mouseup(function() {
+          timeFormOffset(e, this);
+      });
+
+      $(document).mouseup(function() {
+          mouseDown = false;
+      });
+
   });
+
+  function timeFormOffset(mouse, progressBar) {
+      let percentage = mouse.offsetX / $(progressBar).width() * 100;
+      let secondsOffsetting = audioElement.audio.duration * (percentage / 100);
+      audioElement.setTime(secondsOffsetting);
+  }
 
   // arguments(songId, song, true or false) trueで音楽再生
   function setTrack(trackId, newPlaylist, play) {
