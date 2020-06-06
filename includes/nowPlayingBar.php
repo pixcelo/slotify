@@ -121,8 +121,8 @@ $jsonArray = json_encode($resultArray);
                 <img src="assets/images/icons/pause.png" alt="Pause">
               </button>
 
-              <button class="controlButton next" title="Shuffle button">
-                <img src="assets/images/icons/next.png" alt="Shuffle">
+              <button class="controlButton next" title="Next button">
+                <img src="assets/images/icons/next.png" alt="next">
               </button>
 
               <button class="controlButton repeat" title="Repeat button">
@@ -150,7 +150,7 @@ $jsonArray = json_encode($resultArray);
     <div id="nowPlayingRight">
         <div class="volumeBar">
 
-          <button class="controlButton volume" title="Volume Button">
+          <button class="controlButton volume" title="Volume button">
               <img src="assets/images/icons/volume.png" alt="Volume">
           </button>
 
