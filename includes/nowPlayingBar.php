@@ -76,6 +76,7 @@ $jsonArray = json_encode($resultArray);
 
   // 前の曲を再生（曲の頭に戻る）
   function prevSong() {
+      // 再生時間が3秒より大きい、または一番最初の曲なら
       if (audioElement.audio.currentTime >= 3 || currentIndex == 0) {
           audioElement.setTime(0);
       } else {
@@ -110,6 +111,13 @@ $jsonArray = json_encode($resultArray);
       repeat = !repeat; // デフォルトはfalse
       let imageName = repeat ? "repeat-active.png" : "repeat.png";
       $(".controlButton.repeat img").attr("src", "assets/images/icons/" + imageName);
+  }
+
+  // ミュート機能
+  function setMute() {
+      audioElement.audio.muted = !audioElement.audio.muted;
+      let imageName_mute = audioElement.audio.muted ? "volume-mute.png" : "volume.png";
+      $(".controlButton.volume img").attr("src", "assets/images/icons/" + imageName_mute);
   }
 
   // arguments(songId, song, true or false) trueで音楽再生
@@ -244,7 +252,7 @@ $jsonArray = json_encode($resultArray);
     <div id="nowPlayingRight">
         <div class="volumeBar">
 
-          <button class="controlButton volume" title="Volume button">
+          <button class="controlButton volume" title="Volume button" onclick="setMute()">
               <img src="assets/images/icons/volume.png" alt="Volume">
           </button>
 
