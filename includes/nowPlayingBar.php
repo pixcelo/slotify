@@ -74,6 +74,16 @@ $jsonArray = json_encode($resultArray);
       audioElement.setTime(secondsOffsetting);
   }
 
+  // 前の曲を再生（曲の頭に戻る）
+  function prevSong() {
+      if (audioElement.audio.currentTime >= 3 || currentIndex == 0) {
+          audioElement.setTime(0);
+      } else {
+          currentIndex = currentIndex - 1;
+          setTrack(currentPlaylist[currentIndex], currentPlaylist, true);
+      }
+  }
+
   // 次の曲を再生
   function nextSong() {
 
@@ -193,7 +203,7 @@ $jsonArray = json_encode($resultArray);
                 <img src="assets/images/icons/shuffle.png" alt="Shuffle">
               </button>
 
-              <button class="controlButton previous" title="Previous button">
+              <button class="controlButton previous" title="Previous button" onclick="prevSong()">
                 <img src="assets/images/icons/previous.png" alt="Previous">
               </button>
 
