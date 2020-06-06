@@ -33,6 +33,30 @@ $jsonArray = json_encode($resultArray);
           timeFormOffset(e, this);
       });
 
+      // ボリューム調整
+      $(".volumeBar .progressBar").mousedown(function() {
+          mouseDown = true;
+      });
+
+      $(".volumeBar .progressBar").mousemove(function(e) {
+          if(mouseDown) {
+
+              let percentage_volume = e.offsetX / $(this).width();
+
+              if(percentage_volume >= 0 && percentage_volume <= 1) {
+                  audioElement.audio.volume = percentage_volume;
+              }
+          }
+      });
+
+      $(".volumeBar .progressBar").mouseup(function() {
+          let percentage_volume = e.offsetX / $(this).width();
+
+          if(percentage_volume >= 0 && percentage_volume <= 1) {
+              audioElement.audio.volume = percentage_volume;
+          }
+      });
+
       $(document).mouseup(function() {
           mouseDown = false;
       });
