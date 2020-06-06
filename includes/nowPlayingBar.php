@@ -20,6 +20,10 @@ $jsonArray = json_encode($resultArray);
       setTrack(currentPlaylist[0], currentPlaylist, false);
       updateVolumeProgressBar(audioElement.audio);
 
+      $("#nowPlayingBarContainer").on("mousedown touchstart mousemove touchmove", function() {
+          e.preventDefault();
+      });
+
       $(".playbackBar .progressBar").mousedown(function() {
           mouseDown = true;
       });
@@ -70,11 +74,27 @@ $jsonArray = json_encode($resultArray);
       audioElement.setTime(secondsOffsetting);
   }
 
+  // 次の曲を再生
+  function nextSong() {
+      // インデックスが最後なら先頭（0）に戻す
+      if (currentIndex == currentPlaylist.length - 1) {
+          currentIndex = 0;
+      } else {
+          currentIndex++;
+      }
+
+      let trackToplay = currentPlaylist[currentIndex];
+      setTrack(trackToplay, currentPlaylist, true);
+      // console.log(trackToplay);
+  }
+
   // arguments(songId, song, true or false) trueで音楽再生
   function setTrack(trackId, newPlaylist, play) {
     
     // ajax getSongJson.phpの内容(JSONデータ)が引数dataに入る
     $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
+
+        currentIndex = currentPlaylist.indexOf(trackId);
 
         // console.log(data);
         let track = JSON.parse(data);

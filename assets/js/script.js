@@ -1,6 +1,7 @@
 let currentPlaylist = [];
 let audioElement;
 let mouseDown = false;
+let currentIndex = 0;
 
 // duration（再生時間）のフォーマット
 function formatTime(seconds) {
