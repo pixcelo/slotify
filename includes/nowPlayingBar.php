@@ -7,11 +7,39 @@ while($row = mysqli_fetch_array($songQuery)) {
   array_push($resultArray, $row['id']);
 }
 
+// 配列にidを格納してJSON形式にエンコード
 $jsonArray = json_encode($resultArray);
 ?>
 
 <script>
-  console.log(<?php echo $jsonArray; ?>);
+
+  $(document).ready(function() {
+      currentPlaylist = <?php echo $jsonArray; ?>;
+      audioElement = new Audio(); // from script.js
+      setTrack(currentPlaylist[0], currentPlaylist, false);
+  });
+
+  // arguments(songId, song, true or false) trueで音楽再生
+  function setTrack(trackId, newPlaylist, play) {
+      audioElement.setTrack("assets/music/bensound-acousticbreeze.mp3");
+
+      if (play) {
+        audioElement.play();
+      }
+  }
+
+  function playSong() {
+      $(".controlButton.play").hide();
+      $(".controlButton.pause").show();
+      audioElement.play();
+  }
+
+  function pauseSong() {
+      $(".controlButton.play").show();
+      $(".controlButton.pause").hide();
+      audioElement.pause();
+  }
+
 </script>
 
 <div id="nowPlayingBarContainer">
@@ -53,11 +81,11 @@ $jsonArray = json_encode($resultArray);
                 <img src="assets/images/icons/previous.png" alt="Previous">
               </button>
 
-              <button class="controlButton play" title="Play button">
+              <button class="controlButton play" title="Play button" onclick="playSong()">
                 <img src="assets/images/icons/play.png" alt="Play">
               </button>
 
-              <button class="controlButton Pause" title="Pause button" style="display: none;">
+              <button class="controlButton pause" title="Pause button" style="display: none;" onclick="pauseSong()">
                 <img src="assets/images/icons/pause.png" alt="Pause">
               </button>
 
