@@ -23,11 +23,27 @@ $jsonArray = json_encode($resultArray);
   function setTrack(trackId, newPlaylist, play) {
     
     // ajax getSongJson.phpの内容(JSONデータ)が引数dataに入る
-    $.post("includes/handlers/ajax/getSongJson.php", { songId : trackId }, function(data) {
+    $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
 
         // console.log(data);
         let track = JSON.parse(data);
         // console.log(track);
+        
+        // JSONデータのtitleをtrackNameに表示
+        $(".trackName span").text(track.title);
+
+        // JSONデータからアーティストネームを取得
+        $.post("includes/handlers/ajax/getArtistJson.php", { artistId: track.artist }, function(data) {
+            let artist = JSON.parse(data);
+            $(".artistName span").text(artist.name);
+        });
+
+        // JSONデータからアルバムのアートワークを取得
+        $.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album }, function(data) {
+            let album = JSON.parse(data);
+            $(".albumLink img").attr("src", album.artworkPath);
+        });
+
         audioElement.setTrack(track.path);
         audioElement.play();
     });
@@ -35,6 +51,7 @@ $jsonArray = json_encode($resultArray);
       if (play) {
         audioElement.play();
       }
+      
   }
 
   function playSong() {
@@ -58,16 +75,16 @@ $jsonArray = json_encode($resultArray);
     <div id="nowPlayingLeft">
       <div class="content">
         <span class="albumLink">
-            <img src="assets/images/unnamed.png" alt="" class="albumArtwork">
+            <img src="" alt="" class="albumArtwork">
         </span>
 
         <div class="trackInfo">
           <span class="trackName">
-            <span>happy</span>
+            <span></span>
           </span>
 
           <span class="artistName">
-            <span>reeec kenny</span>
+            <span></span>
           </span>
         </div>
 
