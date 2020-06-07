@@ -15,9 +15,9 @@ $jsonArray = json_encode($resultArray);
 
   // プログレスバーのマウス操作
   $(document).ready(function() {
-      currentPlaylist = <?php echo $jsonArray; ?>;
+      let newPlaylist = <?php echo $jsonArray; ?>;
       audioElement = new Audio(); // from script.js
-      setTrack(currentPlaylist[0], currentPlaylist, false);
+      setTrack(newPlaylist[0], newPlaylist, false);
       updateVolumeProgressBar(audioElement.audio);
 
       $("#nowPlayingBarContainer").on("mousedown touchstart mousemove touchmove", function() {
@@ -101,7 +101,8 @@ $jsonArray = json_encode($resultArray);
           currentIndex++;
       }
 
-      let trackToplay = currentPlaylist[currentIndex];
+      // シャッフルがtrueならインデックス変更
+      let trackToplay = shuffle ? shufflePlaylist[currentIndex] : currentPlaylist[currentIndex];
       setTrack(trackToplay, currentPlaylist, true);
       // console.log(trackToplay);
   }
@@ -120,10 +121,49 @@ $jsonArray = json_encode($resultArray);
       $(".controlButton.volume img").attr("src", "assets/images/icons/" + imageName_mute);
   }
 
+  // シャッフル機能
+  function setShuffle() {
+      shuffle = !shuffle; // デフォルトはfalse
+      let imageName_shuffle = shuffle ? "shuffle-active.png" : "shuffle.png";
+      $(".controlButton.shuffle img").attr("src", "assets/images/icons/" + imageName_shuffle);
+
+      if (shuffle) {
+          // プレイリストをランダムに並び替え
+          shuffleArray(shufflePlaylist);
+          currentIndex = shufflePlaylist.indexOf(auidoElement.currentlyPlaying.id);
+      } else {
+          currentIndex = currentPlaylist.indexOf(auidoElement.currentlyPlaying.id);
+      }
+  }
+
+  /**
+  * Shuffles array in place.
+  * @param {Array} a items An array containing the items.
+  */
+  function shuffleArray(a) {
+    let j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+  }
+
   // arguments(songId, song, true or false) trueで音楽再生
   function setTrack(trackId, newPlaylist, play) {
 
-    currentIndex = currentPlaylist.indexOf(trackId);
+    if (newPlaylist != currentPlaylist) {
+        currentPlaylist = newPlaylist;
+        shufflePlaylist = currentPlaylist.slice();
+        shuffleArray(shufflePlaylist);
+    }
+
+    if (shuffle) {
+        currentIndex = currentPlaylist.indexOf(trackId);
+    } else {
+        currentIndex = currentPlaylist.indexOf(trackId);
+    }
     pauseSong();
     
     // ajax getSongJson.phpの内容(JSONデータ)が引数dataに入る
@@ -207,7 +247,7 @@ $jsonArray = json_encode($resultArray);
           <div class="buttons">
 
 
-              <button class="controlButton shuffle" title="Shuffle button">
+              <button class="controlButton shuffle" title="Shuffle button" onclick="setShuffle()">
                 <img src="assets/images/icons/shuffle.png" alt="Shuffle">
               </button>
 
