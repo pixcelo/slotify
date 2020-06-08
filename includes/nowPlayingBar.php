@@ -20,7 +20,7 @@ $jsonArray = json_encode($resultArray);
       setTrack(newPlaylist[0], newPlaylist, false);
       updateVolumeProgressBar(audioElement.audio);
 
-      $("#nowPlayingBarContainer").on("mousedown touchstart mousemove touchmove", function() {
+      $("#nowPlayingBarContainer").on("mousedown touchstart mousemove touchmove", function(e) {
           e.preventDefault();
       });
 
@@ -30,12 +30,12 @@ $jsonArray = json_encode($resultArray);
 
       $(".playbackBar .progressBar").mousemove(function(e) {
           if(mouseDown) {
-              timeFormOffset(e, this);
+              timeFromOffset(e, this);
           }
       });
 
-      $(".playbackBar .progressBar").mouseup(function() {
-          timeFormOffset(e, this);
+      $(".playbackBar .progressBar").mouseup(function(e) {
+          timeFromOffset(e, this);
       });
 
       // ボリューム調整
@@ -68,7 +68,7 @@ $jsonArray = json_encode($resultArray);
 
   });
 
-  function timeFormOffset(mouse, progressBar) {
+  function timeFromOffset(mouse, progressBar) {
       let percentage = mouse.offsetX / $(progressBar).width() * 100;
       let secondsOffsetting = audioElement.audio.duration * (percentage / 100);
       audioElement.setTime(secondsOffsetting);
@@ -102,8 +102,8 @@ $jsonArray = json_encode($resultArray);
       }
 
       // シャッフルがtrueならインデックス変更
-      let trackToplay = shuffle ? shufflePlaylist[currentIndex] : currentPlaylist[currentIndex];
-      setTrack(trackToplay, currentPlaylist, true);
+      let trackToPlay = shuffle ? shufflePlaylist[currentIndex] : currentPlaylist[currentIndex];
+      setTrack(trackToPlay, currentPlaylist, true);
       // console.log(trackToplay);
   }
 
@@ -131,9 +131,9 @@ $jsonArray = json_encode($resultArray);
           // プレイリストをランダムに並び替え
           shuffleArray(shufflePlaylist);
           // indexOfは検索を始め、指定された値が最初に現れたインデックスを返す
-          currentIndex = shufflePlaylist.indexOf(auidoElement.currentlyPlaying.id);
+          currentIndex = shufflePlaylist.indexOf(audioElement.currentlyPlaying.id);
       } else {
-          currentIndex = currentPlaylist.indexOf(auidoElement.currentlyPlaying.id);
+          currentIndex = currentPlaylist.indexOf(audioElement.currentlyPlaying.id);
       }
   }
 
@@ -161,7 +161,7 @@ $jsonArray = json_encode($resultArray);
     }
 
     if (shuffle) {
-        currentIndex = currentPlaylist.indexOf(trackId);
+        currentIndex = shufflePlaylist.indexOf(trackId);
     } else {
         currentIndex = currentPlaylist.indexOf(trackId);
     }
@@ -222,7 +222,7 @@ $jsonArray = json_encode($resultArray);
     <div id="nowPlayingLeft">
       <div class="content">
         <span class="albumLink">
-            <img src="" alt="" class="albumArtwork">
+            <img src="" class="albumArtwork">
         </span>
 
         <div class="trackInfo">
@@ -233,11 +233,11 @@ $jsonArray = json_encode($resultArray);
           <span class="artistName">
             <span></span>
           </span>
+
+
         </div>
 
       </div>
-
-
     </div>
 
     <div id="nowPlayingCenter">
@@ -264,7 +264,7 @@ $jsonArray = json_encode($resultArray);
               </button>
 
               <button class="controlButton next" title="Next button" onclick="nextSong()">
-                <img src="assets/images/icons/next.png" alt="next">
+                <img src="assets/images/icons/next.png" alt="Next">
               </button>
 
               <button class="controlButton repeat" title="Repeat button" onclick="setRepeat()">

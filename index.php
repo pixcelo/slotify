@@ -12,18 +12,15 @@ include("includes/includedFiles.php");
           
 
           echo "<div class='gridViewItem'>
-              <a href='album.php?id=" . $row['id'] . "'>
-                  <img src='" . $row['artworkPath'] ."'>
+                    <span role='link' tabindex='0' onclick='openPage(\"album.php?id=" . $row['id'] . "\")'>
+                        <img src='" . $row['artworkPath'] ."'>
 
-                  <div class='gridViewInfo'>"
-                      . $row['title'] .
-                  "</div>
-              </a>
-
-              </div>";
+                        <div class='gridViewInfo'>"
+                            . $row['title'] .
+                        "</div>
+                    </span>
+                </div>";
 
         }
     ?>
 </div>
-
-<?php include("includes/footer.php"); ?>

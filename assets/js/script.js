@@ -15,8 +15,8 @@ function openPage(url) {
         url = url + "?";
     }
     // URLをユーザー名にチェンジ（通常はalbum.phpが表示）
-    let encodeUrl = encodeURI(url + "&userLoggedIn=" + userLoggedIn);
-    $("#mainContent").load(encodeUrl);
+    let encodedUrl = encodeURI(url + "&userLoggedIn=" + userLoggedIn);
+    $("#mainContent").load(encodedUrl);
 }
 
 // duration（再生時間）のフォーマット

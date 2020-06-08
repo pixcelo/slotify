@@ -1,7 +1,7 @@
-<?php include("includes/header.php"); 
+<?php include("includes/includedFiles.php");
 
 if(isset($_GET['id'])) {
-    $albumId =  $_GET['id'];
+    $albumId = $_GET['id'];
 }
 else {
     header("Location: index.php");
@@ -26,13 +26,13 @@ $artist = $album->getArtist();
     <div class="rightSection">
       <h2><?php echo $album->getTitle(); ?></h2>
       <p>By <?php echo $artist->getName(); ?></p>
-      <p> <?php echo $album->getNumberOfSongs(); ?> songs</p>
+      <p><?php echo $album->getNumberOfSongs(); ?> songs</p>
     </div>
 
 </div>
 
 <div class="tracklistContainer">
-  <ul class="trackList">
+  <ul class="tracklist">
     
     <?php
     $songIdArray = $album->getSongIds();
@@ -44,15 +44,15 @@ $artist = $album->getArtist();
       $albumSong = new Song($con, $songId);
       $albumArtist = $albumSong->getArtist();
       
-      echo "<li class='trackListRow'>
+      echo "<li class='tracklistRow'>
               <div class='trackCount'>
-                  <img class='play' src='assets/images/icons/play-white.png' onclick='setTrack(\™" . $albumSong->getId() ."\", tempPlaylist, true)'>
+                  <img class='play' src='assets/images/icons/play-white.png' onclick='setTrack(\"" . $albumSong->getId() ."\", tempPlaylist, true)'>
                   <span class='trackNumber'>$i</span>
               </div>
 
               <div class='trackInfo'>
                 <span class='trackName'>" . $albumSong->getTitle() . "</span>
-                <span class='artistname'>" . $albumArtist->getName() . "</span>
+                <span class='artistName'>" . $albumArtist->getName() . "</span>
               </div>
 
               <div class='trackOptions'>
@@ -70,13 +70,10 @@ $artist = $album->getArtist();
     ?>
 
     <script>
-      let tempSongIds = <?php echo json_encode($songIdArray); ?>
+      let tempSongIds = '<?php echo json_encode($songIdArray); ?>';
       tempPlaylist = JSON.parse(tempSongIds);
 
     </script>
 
   </ul>
 </div>
-
-
-<?php include("includes/footer.php"); ?>

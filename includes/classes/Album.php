@@ -11,8 +11,8 @@
       $this->con = $con;
       $this->id = $id;
 
-      $Query = mysqli_query($this->con, "SELECT * FROM albums WHERE id='$this->id'");
-      $album = mysqli_fetch_array($Query);
+      $query = mysqli_query($this->con, "SELECT * FROM albums WHERE id='$this->id'");
+      $album = mysqli_fetch_array($query);
 
       $this->title = $album['title'];
       $this->artistId = $album['artist'];
