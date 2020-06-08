@@ -188,14 +188,15 @@ $jsonArray = json_encode($resultArray);
         });
 
         audioElement.setTrack(track);
-    });
 
-    if (play) {
-      audioElement.play();
-    }
+        if (play) {
+            playSong();
+        }
+    });
 
   }
 
+  // 曲の再生、再生ボタンの変更
   function playSong() {
       // console.log(audioElement );
       if (audioElement.audio.currentTime == 0) {
