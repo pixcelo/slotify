@@ -8,6 +8,7 @@ include('includes/classes/Song.php'); // クラス内でArtistクラスとAlbum�
 if (isset($_SESSION['userLoggedIn'])) {
     $userLoggedIn = $_SESSION['userLoggedIn'];
     // var_dump($userLoggedIn); // ユーザーネームが代入されている
+    echo "<script>userLoggedIn = '$userLoggedIn'</script>";
 } else {
   header('Location: register.php');
 }

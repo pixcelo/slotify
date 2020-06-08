@@ -130,6 +130,7 @@ $jsonArray = json_encode($resultArray);
       if (shuffle) {
           // プレイリストをランダムに並び替え
           shuffleArray(shufflePlaylist);
+          // indexOfは検索を始め、指定された値が最初に現れたインデックスを返す
           currentIndex = shufflePlaylist.indexOf(auidoElement.currentlyPlaying.id);
       } else {
           currentIndex = currentPlaylist.indexOf(auidoElement.currentlyPlaying.id);
@@ -187,12 +188,11 @@ $jsonArray = json_encode($resultArray);
         });
 
         audioElement.setTrack(track);
-        playSong();
     });
 
-      if (play) {
-        audioElement.play();
-      }
+    if (play) {
+      audioElement.play();
+    }
 
   }
 

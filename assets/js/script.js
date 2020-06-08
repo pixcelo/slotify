@@ -6,6 +6,18 @@ let mouseDown = false;
 let currentIndex = 0;
 let repeat = false;
 let shuffle = false;
+let userLoggedIn;
+
+function openPage(url) {
+
+    // indexOfは検索して見つからない場合は-1を返す
+    if (url.indexOf("?") == -1) {
+        url = url + "?";
+    }
+    // URLをユーザー名にチェンジ（通常はalbum.phpが表示）
+    let encodeUrl = encodeURI(url + "&userLoggedIn=" + userLoggedIn);
+    $("#mainContent").load(encodeUrl);
+}
 
 // duration（再生時間）のフォーマット
 function formatTime(seconds) {
