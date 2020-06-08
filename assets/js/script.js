@@ -18,7 +18,7 @@ function openPage(url) {
     let encodedUrl = encodeURI(url + "&userLoggedIn=" + userLoggedIn);
     $("#mainContent").load(encodedUrl);
     $("body").scrollTop(0);
-    history.pushState(null, null, url);
+    history.pushState(null, null, url); // ブラウザ履歴に指定のurl追加
 }
 
 // duration（再生時間）のフォーマット
