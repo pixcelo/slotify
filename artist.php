@@ -17,7 +17,7 @@ $artist = new Artist($con, $artistId);
       <div class="artistInfo">
           <h1 class="artistName"><?php echo $artist->getName(); ?></h1>
           <div class="headerButtons">
-             <button class="button green">PLAY</button>
+             <button class="button green" onclick="playFirstSong()">PLAY</button>
           </div>
       </div>
 
@@ -71,7 +71,6 @@ $artist = new Artist($con, $artistId);
     <script>
       let tempSongIds = '<?php echo json_encode($songIdArray); ?>';
       tempPlaylist = JSON.parse(tempSongIds);
-
     </script>
 
   </ul>
