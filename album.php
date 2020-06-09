@@ -2,8 +2,7 @@
 
 if(isset($_GET['id'])) {
     $albumId = $_GET['id'];
-}
-else {
+} else {
     header("Location: index.php");
 }
 
