@@ -1,5 +1,6 @@
 <?php
 include("includes/includedFiles.php");
+var_dump($userLoggedIn) ;
 ?>
 
 <h1 class="pageHeadingBig">You Might Also Like</h1>

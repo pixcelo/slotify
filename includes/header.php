@@ -8,7 +8,7 @@ include('includes/classes/Song.php'); // クラス内でArtistクラスとAlbum�
 if (isset($_SESSION['userLoggedIn'])) {
     $userLoggedIn = $_SESSION['userLoggedIn'];
     // var_dump($userLoggedIn); // ユーザーネームが代入されている
-    echo "<script>userLoggedIn = '$userLoggedIn'</script>";
+    echo "<script>userLoggedIn = '$userLoggedIn';</script>";
 } else {
   header('Location: register.php');
 }
@@ -36,7 +36,3 @@ if (isset($_SESSION['userLoggedIn'])) {
 
         <div id="mainViewContainer">
             <div id="mainContent">
-
-
-
-            </div>

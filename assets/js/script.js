@@ -9,7 +9,6 @@ let shuffle = false;
 let userLoggedIn;
 
 function openPage(url) {
-
     // indexOfは検索して見つからない場合は-1を返す
     if (url.indexOf("?") == -1) {
         url = url + "?";
