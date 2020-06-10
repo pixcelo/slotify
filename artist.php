@@ -1,6 +1,8 @@
 <?php
 include("includes/includedFiles.php");
 
+// session_destroy();
+
 if(isset($_GET['id'])) {
   $artistId = $_GET['id'];
 } else {
@@ -45,7 +47,7 @@ $artist = new Artist($con, $artistId);
       
       echo "<li class='tracklistRow'>
               <div class='trackCount'>
-                  <img class='play' src='assets/images/icons/play-white.png' onclick='setTrack(\"" . $albumSong->getId() ."\", tempPlaylist, true)'>
+                  <img class='play' src='assets/images/icons/play-white.png' onclick='setTrack(\"" . $albumSong->getId() . "\", tempPlaylist, true)'>
                   <span class='trackNumber'>$i</span>
               </div>
 
@@ -86,7 +88,7 @@ $artist = new Artist($con, $artistId);
 
           echo "<div class='gridViewItem'>
                     <span role='link' tabindex='0' onclick='openPage(\"album.php?id=" . $row['id'] . "\")'>
-                        <img src='" . $row['artworkPath'] ."'>
+                        <img src='" . $row['artworkPath'] . "'>
 
                         <div class='gridViewInfo'>"
                             . $row['title'] .

@@ -6,14 +6,11 @@ if(isset($_GET['id'])) {
     header("Location: index.php");
 }
 
-// classes/Album.phpクラスをインスタンス化
 $album = new Album($con, $albumId);
 
 $artist = $album->getArtist();
+$artistId = $artist->getId();
 
-// 各クラスのメソッドを呼び出し
-// echo $album->getTitle() . "<br>";
-// echo $artist->getName();
 
 ?>
 
@@ -24,7 +21,7 @@ $artist = $album->getArtist();
 
     <div class="rightSection">
       <h2><?php echo $album->getTitle(); ?></h2>
-      <p>By <?php echo $artist->getName(); ?></p>
+      <p role="link" tabindex="0" onclick="openPage('artist.php?id=$artistId')">By <?php echo $artist->getName(); ?></p>
       <p><?php echo $album->getNumberOfSongs(); ?> songs</p>
     </div>
 
@@ -45,7 +42,7 @@ $artist = $album->getArtist();
       
       echo "<li class='tracklistRow'>
               <div class='trackCount'>
-                  <img class='play' src='assets/images/icons/play-white.png' onclick='setTrack(\"" . $albumSong->getId() ."\", tempPlaylist, true)'>
+                  <img class='play' src='assets/images/icons/play-white.png' onclick='setTrack(\"" . $albumSong->getId() . "\", tempPlaylist, true)'>
                   <span class='trackNumber'>$i</span>
               </div>
 
@@ -69,7 +66,7 @@ $artist = $album->getArtist();
     ?>
 
     <script>
-      var tempSongIds = '<?php echo json_encode($songIdArray); ?>';
+      let tempSongIds = '<?php echo json_encode($songIdArray); ?>';
       tempPlaylist = JSON.parse(tempSongIds);
     </script>
 

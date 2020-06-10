@@ -179,12 +179,15 @@ $jsonArray = json_encode($resultArray);
         $.post("includes/handlers/ajax/getArtistJson.php", { artistId: track.artist }, function(data) {
             let artist = JSON.parse(data);
             $(".artistName span").text(artist.name);
+            $(".artistName span").attr("onclick", "openPage('artist.php?id=" + artist.id + "')");
         });
 
         // JSONデータからアルバムのアートワークを取得
         $.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album }, function(data) {
             let album = JSON.parse(data);
             $(".albumLink img").attr("src", album.artworkPath);
+            $(".albumLink img").attr("onclick", "openPage('album.php?id=" + album.id + "')");
+            $(".trackName span").attr("onclick", "openPage('album.php?id=" + album.id + "')");
         });
 
         audioElement.setTrack(track);
@@ -198,7 +201,7 @@ $jsonArray = json_encode($resultArray);
 
   // 曲の再生、再生ボタンの変更
   function playSong() {
-      // console.log(audioElement );
+
       if (audioElement.audio.currentTime == 0) {
           $.post("includes/handlers/ajax/updatePlays.php", { songId: audioElement.currentlyPlaying.id });
       }
@@ -223,16 +226,16 @@ $jsonArray = json_encode($resultArray);
     <div id="nowPlayingLeft">
       <div class="content">
         <span class="albumLink">
-            <img src="" class="albumArtwork">
+            <img role="link" tabindex="0" src="" class="albumArtwork">
         </span>
 
         <div class="trackInfo">
           <span class="trackName">
-            <span></span>
+            <span role="link" tabindex="0"></span>
           </span>
 
           <span class="artistName">
-            <span></span>
+            <span role="link" tabindex="0"></span>
           </span>
 
 

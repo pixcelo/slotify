@@ -7,10 +7,9 @@ include('includes/classes/Song.php'); // クラス内でArtistクラスとAlbum�
 // ログイン処理を実行してindex.phpに訪問した場合のみ$_SESSION['userLoggedIn']が渡ってくる
 if (isset($_SESSION['userLoggedIn'])) {
     $userLoggedIn = $_SESSION['userLoggedIn'];
-    // var_dump($userLoggedIn); // ユーザーネームが代入されている
     echo "<script>userLoggedIn = '$userLoggedIn';</script>";
 } else {
-  header('Location: register.php');
+    header('Location: register.php');
 }
 
 ?>
@@ -25,9 +24,8 @@ if (isset($_SESSION['userLoggedIn'])) {
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="assets/js/script.js"></script>
 </head>
+
 <body>
-
-
 
   <div id="mainContainer">
       <div id="topContainer">
