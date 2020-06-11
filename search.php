@@ -11,7 +11,7 @@ if (isset($_GET['term'])) {
 
 <div class="searchContainer">
     <h4>Search for an artist, album or song</h4>
-    <input type="text" class="searchInput" value="<?php echo $term; ?>" placeholder="Start typeing..." onfocus="this.value = this.value">
+    <input type="text" class="searchInput" value="<?php echo $term; ?>" placeholder="Start typing..." onfocus="this.value = this.value">
 </div>
 
 <script>
@@ -93,11 +93,11 @@ if (isset($_GET['term'])) {
   </ul>
 </div>
 
-<div class="artistContainer borderBotton">
+<div class="artistsContainer borderBottom">
       <h2>ARTISTS</h2>
 
       <?php 
-        $artistsQuery = mysqli_query($con, "SELECT id FROM artists WHERE namae LIKE '$term%' LIMIT 10");
+        $artistsQuery = mysqli_query($con, "SELECT id FROM artists WHERE name LIKE '$term%' LIMIT 10");
 
         if (mysqli_num_rows($artistsQuery) == 0) {
             echo "<span class='noResults'>" . $term ."に該当するアーティストは見つかりませんでした。</span>";
@@ -109,7 +109,11 @@ if (isset($_GET['term'])) {
             echo "<div class='searchResultRow'>
                     <div class='artistName'>
 
-                        <span></span>
+                        <span role='link' tabindex='0' onclick='openPage(\"artist.php?id=" . $artistFound->getId() . "\")'>
+                        "
+                        . $artistFound->getName() .
+                        "
+                        </span>
 
                     </div>
 
