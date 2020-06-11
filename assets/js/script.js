@@ -7,8 +7,15 @@ let currentIndex = 0;
 let repeat = false;
 let shuffle = false;
 let userLoggedIn;
+let timer;
 
 function openPage(url) {
+
+    // ページ遷移後はtimerを切る
+    if (timer != null) {
+        clearTimeout(timer);
+    }
+
     // indexOfは検索して見つからない場合は-1を返す
     if (url.indexOf("?") == -1) {
         url = url + "?";

@@ -20,7 +20,6 @@ if (isset($_GET['term'])) {
   $(".searchInput").focus();
 
   $(function() {
-      let timer;
 
       // キー入力が終了したら、タイマーを初期化して新しいタイマーをセット
       $(".searchInput").keyup(function() {
@@ -34,6 +33,9 @@ if (isset($_GET['term'])) {
 
   })
 </script>
+
+<!-- 検索結果が空白ならページロードをストップ -->
+<?php if ($term == "") exit(); ?>
 
 <div class="tracklistContainer borderBottom">
   <h2>SONGS</h2>
@@ -120,4 +122,29 @@ if (isset($_GET['term'])) {
                 </div>";
         }
       ?>
+</div>
+
+<div class="gridViewContainer">
+  <h2>ALBUMS</h2>
+  <?php
+        $albumQuery = mysqli_query($con, "SELECT * FROM albums WHERE title LIKE '$term%' LIMIT 10");
+
+        if (mysqli_num_rows($albumQuery) == 0) {
+          echo "<span class='noResults'>" . $term ."に該当するアルバムは見つかりませんでした。</span>";
+        }
+
+        while($row = mysqli_fetch_array($albumQuery)) {
+
+          echo "<div class='gridViewItem'>
+                    <span role='link' tabindex='0' onclick='openPage(\"album.php?id=" . $row['id'] . "\")'>
+                        <img src='" . $row['artworkPath'] . "'>
+
+                        <div class='gridViewInfo'>"
+                            . $row['title'] .
+                        "</div>
+                    </span>
+                </div>";
+
+        }
+    ?>
 </div>
