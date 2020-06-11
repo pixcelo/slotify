@@ -104,7 +104,6 @@ $jsonArray = json_encode($resultArray);
       // シャッフルがtrueならインデックス変更
       let trackToPlay = shuffle ? shufflePlaylist[currentIndex] : currentPlaylist[currentIndex];
       setTrack(trackToPlay, currentPlaylist, true);
-      // console.log(trackToplay);
   }
 
   // リピート再生のオン・オフ

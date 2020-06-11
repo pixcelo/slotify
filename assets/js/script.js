@@ -6,7 +6,7 @@ let mouseDown = false;
 let currentIndex = 0;
 let repeat = false;
 let shuffle = false;
-let userLoggedIn;
+var userLoggedIn; // varは変数の重複を許す
 let timer;
 
 function openPage(url) {
@@ -28,16 +28,17 @@ function openPage(url) {
     history.pushState(null, null, url); // ブラウザ履歴に指定のurl追加
 }
 
-function createPlaylist(username) {
+function createPlaylist() {
     // prompt:ユーザにテキストを入力することを促すメッセージを持つダイアログを表示
     let alert = prompt("プレイリスト名を入力してください");
 
     if (alert != null) {
         
-        $.post("includes/handlers/ajax/createPlaylist.php", {name: alert, username: username })
-        .done(dunction() { 
+        // $.postは$.ajaxの略記
+        $.post("includes/handlers/ajax/createPlaylist.php", { name: alert, username: userLoggedIn })
+        .done(function() { 
             // doneは後に実行したい処理を書く
-            
+            openPage("yourMusic.php");
         });
     }
 }
@@ -48,13 +49,7 @@ function formatTime(seconds) {
     let minutes = Math.floor(time / 60);
     let secondsFormatted = time - (minutes * 60);
 
-    let extraZero;
-
-    if (secondsFormatted < 10) {
-      extraZero = "0";
-    } else {
-      extraZero = "";
-    }
+    let extraZero = (secondsFormatted < 10) ? "0" : "";
 
     return minutes + ":" + extraZero + secondsFormatted;
 }

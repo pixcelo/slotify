@@ -1,5 +1,5 @@
 <?php include("includes/includedFiles.php");?>
-
+<?php var_dump($_SESSION); ?>
 <h1 class="pageHeadingBig">You Might Also Like</h1>
 
 <div class="gridViewContainer">
