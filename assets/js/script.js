@@ -28,6 +28,20 @@ function openPage(url) {
     history.pushState(null, null, url); // ブラウザ履歴に指定のurl追加
 }
 
+function createPlaylist(username) {
+    // prompt:ユーザにテキストを入力することを促すメッセージを持つダイアログを表示
+    let alert = prompt("プレイリスト名を入力してください");
+
+    if (alert != null) {
+        
+        $.post("includes/handlers/ajax/createPlaylist.php", {name: alert, username: username })
+        .done(dunction() { 
+            // doneは後に実行したい処理を書く
+            
+        });
+    }
+}
+
 // duration（再生時間）のフォーマット
 function formatTime(seconds) {
     let time = Math.round(seconds);
