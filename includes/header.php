@@ -10,7 +10,7 @@ include('includes/classes/Song.php'); // クラス内でArtistクラスとAlbum�
 // ログイン処理を実行してindex.phpに訪問した場合のみ$_SESSION['userLoggedIn']が渡ってくる
 if (isset($_SESSION['userLoggedIn'])) {
     $userLoggedIn = $_SESSION['userLoggedIn'];
-    var_dump($userLoggedIn);
+    // var_dump($userLoggedIn);
     echo "<script>userLoggedIn = '$userLoggedIn';</script>";
 } else {
     header('Location: register.php');

@@ -9,6 +9,20 @@ let shuffle = false;
 var userLoggedIn; // varは変数の重複を許す
 let timer;
 
+// クラスを持っていない場所をクリックしたらオプションを非表示にする
+$(document).click(function(click) {
+    let target = $(click.target);
+    
+    if (!target.hasClass("item") && !target.hasClass("optionsButton")) {
+        hideOptionsMenus();
+    }
+});
+
+// 画面をスクロールしたときにオプションを非表示にする
+$(window).scroll(function() {
+    hideOptionsMenus();
+});
+
 function openPage(url) {
 
     // ページ遷移後はtimerを切る
@@ -64,6 +78,13 @@ function deletePlaylist(playlistId) {
             openPage("yourMusic.php");
         });
 
+    }
+}
+
+function hideOptionsMenus() {
+    let menu = $(".optionsMenu");
+    if (menu.css("display") != "none") {
+        menu.css("display", "none");
     }
 }
 
