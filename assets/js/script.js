@@ -23,6 +23,16 @@ $(window).scroll(function() {
     hideOptionsMenus();
 });
 
+// オプションのセレクトボタンが変更されたら
+$(document).on("change", "select.playlist", function() {
+    // このthisは、change要素=>optionを指す
+    var playlistId = $(this).val();
+    var songId = $(this).prev(".songId").val(); //prev 一つ前の要素を抽出する
+
+    console.log("playlistId:" + playlistId);
+    console.log("songId:" + songId);
+});
+
 function openPage(url) {
 
     // ページ遷移後はtimerを切る
@@ -91,8 +101,10 @@ function hideOptionsMenus() {
 
 // 曲の横にオプション nav class="optionsMenu"を表示する
 function showOptionsMenu(button) {
+    var songId = $(button).prevAll(".songId").val();
     let menu = $(".optionsMenu");
     let menuWidth = menu.width();
+    menu.find(".songId").val(songId);
 
     let scrollTop = $(window).scrollTop(); // distance from top of window to top of ducument
     let elementOffset = $(button).offset().top; // distance from top of document
