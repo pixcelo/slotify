@@ -67,6 +67,22 @@ function deletePlaylist(playlistId) {
     }
 }
 
+
+// 曲の横にオプション nav class="optionsMenu"を表示する
+function showOptionsMenu(button) {
+    let menu = $(".optionsMenu");
+    let menuWidth = menu.width();
+
+    let scrollTop = $(window).scrollTop(); // distance from top of window to top of ducument
+    let elementOffset = $(button).offset().top; // distance from top of document
+
+    let top = elementOffset - scrollTop;
+    let left = $(button).position().left;
+
+    menu.css({ "top": top + "px", "left": left - menuWidth + "px", "display": "inline"});
+
+}
+
 // duration（再生時間）のフォーマット
 function formatTime(seconds) {
     let time = Math.round(seconds);
