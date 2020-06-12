@@ -48,6 +48,25 @@ function createPlaylist() {
     }
 }
 
+function deletePlaylist(playlistId) {
+    let prompt = confirm("本当にプレイリストを削除しますか?");
+
+    if (prompt) {
+
+        $.post("includes/handlers/ajax/deletePlaylist.php", { playlistId: playlistId })
+        .done(function(error) {
+            
+            if (error != "") {
+                alert(error);
+                return;
+            }
+            // doneは後に実行したい処理を書く
+            openPage("yourMusic.php");
+        });
+
+    }
+}
+
 // duration（再生時間）のフォーマット
 function formatTime(seconds) {
     let time = Math.round(seconds);
