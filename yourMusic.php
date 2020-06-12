@@ -22,9 +22,9 @@ include("includes/includedFiles.php");
 
           while($row = mysqli_fetch_array($playlistQuery)) {
 
-            $playlist = new Playlist($con, $row);
+            $playlist = new Playlist($con, $row); 
 
-            echo "<div class='gridViewItem'>
+            echo "<div class='gridViewItem' role='link' tabindex='0' onclick='openPage(\"playlist.php?id=" . $playlist->getId() . "\")'>
 
                       <div class='playlistImage'>
                         <img src='assets/images/icons/playlist.png'>
