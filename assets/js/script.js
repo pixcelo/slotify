@@ -30,13 +30,18 @@ function openPage(url) {
 
 function createPlaylist() {
     // prompt:ユーザにテキストを入力することを促すメッセージを持つダイアログを表示
-    let alert = prompt("プレイリスト名を入力してください");
+    let popup = prompt("プレイリスト名を入力してください");
 
     if (alert != null) {
         
         // $.postは$.ajaxの略記
-        $.post("includes/handlers/ajax/createPlaylist.php", { name: alert, username: userLoggedIn })
-        .done(function() { 
+        $.post("includes/handlers/ajax/createPlaylist.php", { name: popup, username: userLoggedIn })
+        .done(function(error) {
+            
+            if (error != "") {
+                alert(error);
+                return;
+            }
             // doneは後に実行したい処理を書く
             openPage("yourMusic.php");
         });
