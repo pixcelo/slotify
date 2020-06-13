@@ -64,7 +64,7 @@ function openPage(url) {
     history.pushState(null, null, url); // ブラウザ履歴に指定のurl追加
 }
 
-function removeFromPlaylist(button, playlsitId) {
+function removeFromPlaylist(button, playlistId) {
     var songId = $(button).prevAll(".songId").val();
 
     $.post("includes/handlers/ajax/removeFromPlaylist.php", { playlistId: playlistId, songId: songId })
