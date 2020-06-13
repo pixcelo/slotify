@@ -45,6 +45,12 @@ $(document).on("change", "select.playlist", function() {
 
 });
 
+function logout() {
+    $.post("includes/handlers/ajax/logout.php", function() {
+        location.reload();
+    });
+}
+
 function openPage(url) {
 
     // ページ遷移後はtimerを切る
