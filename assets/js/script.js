@@ -14,23 +14,35 @@ $(document).click(function(click) {
     let target = $(click.target);
     
     if (!target.hasClass("item") && !target.hasClass("optionsButton")) {
-        hideOptionsMenus();
+        hideOptionsMenu();
     }
 });
 
 // 画面をスクロールしたときにオプションを非表示にする
 $(window).scroll(function() {
-    hideOptionsMenus();
+    hideOptionsMenu();
 });
 
 // オプションのセレクトボタンが変更されたら
 $(document).on("change", "select.playlist", function() {
     // このthisは、change要素=>optionを指す
-    var playlistId = $(this).val();
-    var songId = $(this).prev(".songId").val(); //prev 一つ前の要素を抽出する
+    let select = $(this);
 
-    console.log("playlistId:" + playlistId);
-    console.log("songId:" + songId);
+    var playlistId = select.val();
+    var songId = select.prev(".songId").val(); //prev 一つ前の要素を抽出する
+
+    $.post("includes/handlers/ajax/addToPlaylist.php", { playlistId: playlistId, songId: songId})
+    .done(function(error) {
+
+        if (error != "") {
+            alert(error);
+            return;
+        }
+        
+        hideOptionsMenu();
+        select.val("");
+    });
+
 });
 
 function openPage(url) {
@@ -52,11 +64,27 @@ function openPage(url) {
     history.pushState(null, null, url); // ブラウザ履歴に指定のurl追加
 }
 
+function removeFromPlaylist(button, playlsitId) {
+    var songId = $(button).prevAll(".songId").val();
+
+    $.post("includes/handlers/ajax/removeFromPlaylist.php", { playlistId: playlistId, songId: songId })
+    .done(function(error) {
+        
+        if (error != "") {
+            alert(error);
+            return;
+        }
+        // ajaxがreturnしたときに処理を実行
+        openPage("playlist.php?id=" + playlistId);
+    });
+
+}
+
 function createPlaylist() {
     // prompt:ユーザにテキストを入力することを促すメッセージを持つダイアログを表示
     let popup = prompt("プレイリスト名を入力してください");
 
-    if (alert != null) {
+    if (popup != null) {
         
         // $.postは$.ajaxの略記
         $.post("includes/handlers/ajax/createPlaylist.php", { name: popup, username: userLoggedIn })
@@ -91,7 +119,7 @@ function deletePlaylist(playlistId) {
     }
 }
 
-function hideOptionsMenus() {
+function hideOptionsMenu() {
     let menu = $(".optionsMenu");
     if (menu.css("display") != "none") {
         menu.css("display", "none");
@@ -106,8 +134,8 @@ function showOptionsMenu(button) {
     let menuWidth = menu.width();
     menu.find(".songId").val(songId);
 
-    let scrollTop = $(window).scrollTop(); // distance from top of window to top of ducument
-    let elementOffset = $(button).offset().top; // distance from top of document
+    let scrollTop = $(window).scrollTop(); // Distance from top of window to top of document
+    let elementOffset = $(button).offset().top; // Distance from top of document
 
     let top = elementOffset - scrollTop;
     let left = $(button).position().left;

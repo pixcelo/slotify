@@ -67,7 +67,7 @@ $artistId = $artist->getId();
     ?>
 
     <script>
-      let tempSongIds = '<?php echo json_encode($songIdArray); ?>';
+      var tempSongIds = '<?php echo json_encode($songIdArray); ?>';
       tempPlaylist = JSON.parse(tempSongIds);
     </script>
 
@@ -77,6 +77,4 @@ $artistId = $artist->getId();
 <nav class="optionsMenu">
     <input type="hidden" class="songId">
     <?php echo Playlist::getPlaylistsDropdown($con, $userLoggedIn->getUsername()); ?>
-    <div class="item">Item 2</div>
-    <div class="item">Item 3</div>
 </nav>
