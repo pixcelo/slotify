@@ -4,6 +4,9 @@ html, body {
     height: 100%;
 }
 
+*:focus {
+    outline: none;
+}
 * {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #fff;
@@ -200,7 +203,6 @@ body {
 
 .navItemLink:hover {
     color: #fff;
-    cursor: pointer;
 }
 
 .navItemLink .icon {
@@ -284,31 +286,31 @@ body {
     font-weight: 200;
 }
 
-.trackList {
+.tracklist {
     padding: 0;
 }
 
-.trackListRow {
+.tracklistRow {
     height: 40px;
     padding: 15px 10px;
     list-style: none;
 }
 
-.trackListRow span {
+.tracklistRow span {
     color: #939393;
     font-weight: 200;
 }
 
-.trackListRow:hover {
+.tracklistRow:hover {
     background-color: #282828;
 }
 
-.trackListRow .trackCount {
+.tracklistRow .trackCount {
     width: 8%;
     float: left;
 }
 
-.trackListRow .trackCount img {
+.tracklistRow .trackCount img {
     width: 20px;
     /* ホバー時にbisibleにする */
     visibility: hidden;
@@ -316,50 +318,49 @@ body {
     cursor: pointer;
 }
 
-.trackListRow:hover .trackCount img {
+.tracklistRow:hover .trackCount img {
     visibility: visible;
 }
 
-.trackListRow .trackCount span {
+.tracklistRow .trackCount span {
     visibility: visible;
 }
 
-.trackListRow:hover .trackCount span {
+.tracklistRow:hover .trackCount span {
     visibility: hidden;
 }
 
-.trackListRow .trackInfo {
+.tracklistRow .trackInfo {
     width: 75%;
     float: left;
 }
 
-.trackListRow .trackInfo span {
+.tracklistRow .trackInfo span {
     display: block;
 }
 
-.trackListRow .trackOptions {
+.tracklistRow .trackOptions {
     width: 5%;
     float: left;
     text-align: right;
 }
 
-.trackListRow .trackOptions img {
+.tracklistRow .trackOptions img {
     width: 15px;
     visibility: hidden;
 }
 
-.trackListRow:hover .trackOptions img {
-    width: 15px;
+.tracklistRow:hover .trackOptions img {
     visibility: visible;
 }
 
-.trackListRow .trackDuration {
+.tracklistRow .trackDuration {
     width: 12%;
     float: left;
     text-align: right;
 }
 
-.trackListRow .trackInfo .trackName {
+.tracklistRow .trackInfo .trackName {
     color: #fff;
     margin-bottom: 7px;
 }
@@ -388,6 +389,7 @@ body {
 
 .borderBottom {
     border-bottom: 1px solid #939393;
+    margin-bottom: 20px;
 }
 
 .tracklistContainer h2,
@@ -402,7 +404,7 @@ body {
 
 .searchContainer {
     background-color: #242424;
-    padding: 24px 28px;
+    padding: 20px 28px;
 }
 
 .searchContainer h4 {
@@ -446,12 +448,12 @@ input:focus {
     margin: 0 auto 20px auto;
 }
 
-.playListsContainer {
+.playlistsContainer {
     padding: 10px 0;
 }
 
 .playlistImage {
-    border: 3px solid #2a2a2a;
+    border: 3px solid #282828;
     padding: 10px;
 }
 
@@ -497,18 +499,18 @@ input:focus {
     padding: 20px;
 }
 
-.userDetails .container h2{
+.userDetails .container h2 {
     text-align: center;
 }
 .userDetails .container input[type="text"],
 .userDetails .container input[type="password"],
 .userDetails .container .button {
     display: block;
-    margin: 16px;
+    margin: 16px auto;
 }
 
-.userDetails .container input[text="text"],
-.userDetails .container input[text="password"] {
+.userDetails .container input[type="text"],
+.userDetails .container input[type="password"] {
     height: 50px;
     width: 100%;
     background: #1f1f1f;

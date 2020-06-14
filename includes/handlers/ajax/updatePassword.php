@@ -34,7 +34,7 @@ if ($newPassword1 != $newPassword2) {
     exit();
 }
 
-if (preg_match('/[^A-Za-z0-9]/'), $newPassword1) {
+if (preg_match('/[^A-Za-z0-9]/', $newPassword1)) {
     echo "Your password must only contain letters and/or numbers";
 }
 
