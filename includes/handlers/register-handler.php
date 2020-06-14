@@ -11,7 +11,7 @@ function sanitizeFormPassword($inputText) {
   return $inputText;
 }
 
-if (isset($_POST['registerButton'])) {
+if(isset($_POST['registerButton'])) {
   // 登録ボタンを押したとき
   $username = sanitizeFormString($_POST['username']);
   $firstName = sanitizeFormString($_POST['firstName']);
@@ -22,11 +22,11 @@ if (isset($_POST['registerButton'])) {
   $password2 = sanitizeFormPassword($_POST['password2']);
 
   // register.phpでincludeした状態でnew（インスタンス化）しているのでAcountクラスのメソッドが使える
-  $wasSuccessful  = $account->register($username, $firstName, $lastName, $email, $email2, $password, $password2);
+  $wasSuccessful = $account->register($username, $firstName, $lastName, $email, $email2, $password, $password2);
 
-  if ($wasSuccessful) {
+  if($wasSuccessful) {
       $_SESSION['userLoggedIn'] = $username;
-      header('Location: index.php');
+      header("Location: index.php");
   }
 
 }

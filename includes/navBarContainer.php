@@ -2,7 +2,7 @@
   <nav class="navBar">
 
     <span role="link" tabindex="0" onclick="openPage('index.php')" class="logo">
-        <img src="assets/images/icons/logo.png" alt="logo">
+        <img src="assets/images/icons/logo.png">
     </span>
     
     <div class="group">

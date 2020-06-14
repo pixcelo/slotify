@@ -16,13 +16,13 @@ include("includes/includedFiles.php");
 
           $playlistQuery = mysqli_query($con, "SELECT * FROM playlists WHERE owner='$username'");
 
-          if (mysqli_num_rows($playlistQuery) == 0) {
+          if(mysqli_num_rows($playlistQuery) == 0) {
             echo "<span class='noResults'>プレイリストがありません。</span>";
           }
 
           while($row = mysqli_fetch_array($playlistQuery)) {
 
-            $playlist = new Playlist($con, $row); 
+            $playlist = new Playlist($con, $row);
 
             echo "<div class='gridViewItem' role='link' tabindex='0' onclick='openPage(\"playlist.php?id=" . $playlist->getId() . "\")'>
 

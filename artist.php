@@ -1,7 +1,6 @@
 <?php
 include("includes/includedFiles.php");
 
-// session_destroy();
 
 if(isset($_GET['id'])) {
   $artistId = $_GET['id'];
@@ -57,7 +56,7 @@ $artist = new Artist($con, $artistId);
               </div>
 
               <div class='trackOptions'>
-                <input type='hidden' class='songId' value='" . $albumSong->getId() ."'>
+                <input type='hidden' class='songId' value='" . $albumSong->getId() . "'>
                 <img class='optionsButton' src='assets/images/icons/more.png' onclick='showOptionsMenu(this)'>
               </div>
 

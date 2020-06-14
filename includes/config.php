@@ -9,6 +9,6 @@
   // 引数は（ホスト名, ユーザー名, パスワード, データベース名）
   $con = mysqli_connect('localhost', 'root', 'root', 'slotify');
 
-  if (mysqli_connect_error()) {
+  if(mysqli_connect_error()) {
     echo "Failed to connect: ". mysqli_connect_error();
   }

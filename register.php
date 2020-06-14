@@ -1,16 +1,16 @@
 <?php
-  include('includes/config.php');
-  include('includes/classes/Account.php');
-  include('includes/classes/Constants.php');
+  include("includes/config.php");
+  include("includes/classes/Account.php");
+  include("includes/classes/Constants.php");
 
   $account = new Account($con);
 
-  include('includes/handlers/register-handler.php');
-  include('includes/handlers/login-handler.php');
+  include("includes/handlers/register-handler.php");
+  include("includes/handlers/login-handler.php");
 
   // inputのvalueにPOSTで渡った値を表示
   function getInputValue($name) {
-      if (isset($_POST[$name])) {
+      if(isset($_POST[$name])) {
         echo $_POST[$name];
       }
   }
@@ -59,7 +59,7 @@
             <p>
             <?php echo $account->getError(Constants::$loginFailed); ?>
             <label for="loginUsername">ユーザーネーム</label>
-              <input id="loginUsername" name="loginUsername" type="text" placeholder="例：たっくん" value="<?php getInputValue('loginUsername') ?>"  required>
+              <input id="loginUsername" name="loginUsername" type="text" placeholder="例：ニックネーム" value="<?php getInputValue('loginUsername') ?>" required autocomplete="off">
             </p>
             <p>
               <label for="loginPassword">パスワード</label>
@@ -78,10 +78,10 @@
             <h2>アカウント新規登録</h2>
             <p>
             <!-- エラーがあればAccountクラスのエラーメッセージを表示する -->
-            <?php echo $account->getError(Constants::$userNameCharacters); ?>
+            <?php echo $account->getError(Constants::$usernameCharacters); ?>
             <?php echo $account->getError(Constants::$usernameTaken); ?>
             <label for="username">ユーザーネーム</label>
-              <input id="username" name="username" type="text" placeholder="例：たっくん" value="<?php getInputValue('username') ?>" required>
+              <input id="username" name="username" type="text" placeholder="例：ニックネーム" value="<?php getInputValue('username') ?>" required>
             </p>
             <p>
             <?php echo $account->getError(Constants::$firstNameCharacters); ?>
@@ -105,9 +105,9 @@
               <input id="email2" name="email2" type="email" placeholder="例：test@gmail.com" value="<?php getInputValue('email2') ?>" required>
             </p>
             <p>
-              <?php echo $account->getError(Constants::$passwordsDoNomatch); ?>
-              <?php echo $account->getError(Constants::$passwordsNotAlphanumeric); ?>
-              <?php echo $account->getError(Constants::$passwordsCharacters); ?>
+              <?php echo $account->getError(Constants::$passwordsDoNoMatch); ?>
+              <?php echo $account->getError(Constants::$passwordNotAlphanumeric); ?>
+              <?php echo $account->getError(Constants::$passwordCharacters); ?>
               <label for="password">パスワード</label>
               <input id="password" name="password" type="password" placeholder="あなたのパスワード" required>
             </p>
@@ -128,7 +128,7 @@
 
         <div id="loginText">
             <h1>Get great music, right now</h1>
-            <h2>Listen to loads of songs for free.</h2>
+            <h2>Listen to loads of songs for free</h2>
             <ul>
               <li>Discover music you'll fall in love with</li>
               <li>Create your own playlists</li>

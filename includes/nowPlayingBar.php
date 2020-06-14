@@ -15,7 +15,7 @@ $jsonArray = json_encode($resultArray);
 
   // プログレスバーのマウス操作
   $(document).ready(function() {
-      let newPlaylist = <?php echo $jsonArray; ?>;
+      var newPlaylist = <?php echo $jsonArray; ?>;
       audioElement = new Audio(); // from script.js
       setTrack(newPlaylist[0], newPlaylist, false);
       updateVolumeProgressBar(audioElement.audio);
@@ -46,19 +46,19 @@ $jsonArray = json_encode($resultArray);
       $(".volumeBar .progressBar").mousemove(function(e) {
           if(mouseDown) {
 
-              let percentage_volume = e.offsetX / $(this).width();
+              var percentage = e.offsetX / $(this).width();
 
-              if(percentage_volume >= 0 && percentage_volume <= 1) {
-                  audioElement.audio.volume = percentage_volume;
+              if(percentage >= 0 && percentage <= 1) {
+                  audioElement.audio.volume = percentage;
               }
           }
       });
 
-      $(".volumeBar .progressBar").mouseup(function() {
-          let percentage_volume = e.offsetX / $(this).width();
+      $(".volumeBar .progressBar").mouseup(function(e) {
+          var percentage = e.offsetX / $(this).width();
 
-          if(percentage_volume >= 0 && percentage_volume <= 1) {
-              audioElement.audio.volume = percentage_volume;
+          if(percentage >= 0 && percentage <= 1) {
+              audioElement.audio.volume = percentage;
           }
       });
 
@@ -69,15 +69,15 @@ $jsonArray = json_encode($resultArray);
   });
 
   function timeFromOffset(mouse, progressBar) {
-      let percentage = mouse.offsetX / $(progressBar).width() * 100;
-      let secondsOffsetting = audioElement.audio.duration * (percentage / 100);
-      audioElement.setTime(secondsOffsetting);
+      var percentage = mouse.offsetX / $(progressBar).width() * 100;
+      var seconds = audioElement.audio.duration * (percentage / 100);
+      audioElement.setTime(seconds);
   }
 
   // 前の曲を再生（曲の頭に戻る）
   function prevSong() {
       // 再生時間が3秒より大きい、または一番最初の曲なら
-      if (audioElement.audio.currentTime >= 3 || currentIndex == 0) {
+      if(audioElement.audio.currentTime >= 3 || currentIndex == 0) {
           audioElement.setTime(0);
       } else {
           currentIndex = currentIndex - 1;
@@ -88,45 +88,45 @@ $jsonArray = json_encode($resultArray);
   // 次の曲を再生
   function nextSong() {
 
-      if (repeat) {
+      if(repeat) {
           audioElement.setTime(0);
           playSong();
           return;
       }
 
       // インデックスが最後なら先頭（0）に戻す
-      if (currentIndex == currentPlaylist.length - 1) {
+      if(currentIndex == currentPlaylist.length - 1) {
           currentIndex = 0;
       } else {
           currentIndex++;
       }
 
       // シャッフルがtrueならインデックス変更
-      let trackToPlay = shuffle ? shufflePlaylist[currentIndex] : currentPlaylist[currentIndex];
+      var trackToPlay = shuffle ? shufflePlaylist[currentIndex] : currentPlaylist[currentIndex];
       setTrack(trackToPlay, currentPlaylist, true);
   }
 
   // リピート再生のオン・オフ
   function setRepeat() {
       repeat = !repeat; // デフォルトはfalse
-      let imageName = repeat ? "repeat-active.png" : "repeat.png";
+      var imageName = repeat ? "repeat-active.png" : "repeat.png";
       $(".controlButton.repeat img").attr("src", "assets/images/icons/" + imageName);
   }
 
   // ミュート機能
   function setMute() {
       audioElement.audio.muted = !audioElement.audio.muted;
-      let imageName_mute = audioElement.audio.muted ? "volume-mute.png" : "volume.png";
-      $(".controlButton.volume img").attr("src", "assets/images/icons/" + imageName_mute);
+      var imageName = audioElement.audio.muted ? "volume-mute.png" : "volume.png";
+      $(".controlButton.volume img").attr("src", "assets/images/icons/" + imageName);
   }
 
   // シャッフル機能
   function setShuffle() {
       shuffle = !shuffle; // デフォルトはfalse
-      let imageName_shuffle = shuffle ? "shuffle-active.png" : "shuffle.png";
-      $(".controlButton.shuffle img").attr("src", "assets/images/icons/" + imageName_shuffle);
+      var imageName = shuffle ? "shuffle-active.png" : "shuffle.png";
+      $(".controlButton.shuffle img").attr("src", "assets/images/icons/" + imageName);
 
-      if (shuffle) {
+      if(shuffle) {
           // プレイリストをランダムに並び替え
           shuffleArray(shufflePlaylist);
           // indexOfは検索を始め、指定された値が最初に現れたインデックスを返す
@@ -141,7 +141,7 @@ $jsonArray = json_encode($resultArray);
   * @param {Array} a items An array containing the items.
   */
   function shuffleArray(a) {
-    let j, x, i;
+    var j, x, i;
     for (i = a.length - 1; i > 0; i--) {
         j = Math.floor(Math.random() * (i + 1));
         x = a[i];
@@ -153,13 +153,13 @@ $jsonArray = json_encode($resultArray);
   // arguments(songId, song, true or false) trueで音楽再生
   function setTrack(trackId, newPlaylist, play) {
 
-    if (newPlaylist != currentPlaylist) {
+    if(newPlaylist != currentPlaylist) {
         currentPlaylist = newPlaylist;
         shufflePlaylist = currentPlaylist.slice();
         shuffleArray(shufflePlaylist);
     }
 
-    if (shuffle) {
+    if(shuffle) {
         currentIndex = shufflePlaylist.indexOf(trackId);
     } else {
         currentIndex = currentPlaylist.indexOf(trackId);
@@ -169,21 +169,21 @@ $jsonArray = json_encode($resultArray);
     // ajax getSongJson.phpの内容(JSONデータ)が引数dataに入る
     $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
 
-        let track = JSON.parse(data);
+        var track = JSON.parse(data);
         
         // JSONデータのtitleをtrackNameに表示
         $(".trackName span").text(track.title);
 
         // JSONデータからアーティストネームを取得
         $.post("includes/handlers/ajax/getArtistJson.php", { artistId: track.artist }, function(data) {
-            let artist = JSON.parse(data);
+            var artist = JSON.parse(data);
             $(".trackInfo .artistName span").text(artist.name);
             $(".trackInfo .artistName span").attr("onclick", "openPage('artist.php?id=" + artist.id + "')");
         });
 
         // JSONデータからアルバムのアートワークを取得
         $.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album }, function(data) {
-            let album = JSON.parse(data);
+            var album = JSON.parse(data);
             $(".content .albumLink img").attr("src", album.artworkPath);
             $(".content .albumLink img").attr("onclick", "openPage('album.php?id=" + album.id + "')");
             $(".trackInfo .trackName span").attr("onclick", "openPage('album.php?id=" + album.id + "')");
@@ -191,7 +191,7 @@ $jsonArray = json_encode($resultArray);
 
         audioElement.setTrack(track);
 
-        if (play) {
+        if(play) {
             playSong();
         }
     });
@@ -201,7 +201,7 @@ $jsonArray = json_encode($resultArray);
   // 曲の再生、再生ボタンの変更
   function playSong() {
 
-      if (audioElement.audio.currentTime == 0) {
+      if(audioElement.audio.currentTime == 0) {
           $.post("includes/handlers/ajax/updatePlays.php", { songId: audioElement.currentlyPlaying.id });
       }
 

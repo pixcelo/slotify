@@ -16,12 +16,12 @@ $artistId = $artist->getId();
 
 <div class="entityInfo">
     <div class="leftSection">
-      <img src="<?php echo $album->getArtworkPath(); ?>" alt="Artwork">
+      <img src="<?php echo $album->getArtworkPath(); ?>">
     </div>
 
     <div class="rightSection">
       <h2><?php echo $album->getTitle(); ?></h2>
-      <p role="link" tabindex="0" onclick="openPage('artist.php?id=$artistId')">By <?php echo $artist->getName(); ?></p>
+      <p role="link" tabindex="0" onclick="openPage('artist.php?id=<?php echo $artistId; ?>')">By <?php echo $artist->getName(); ?></p>
       <p><?php echo $album->getNumberOfSongs(); ?> songs</p>
     </div>
 
@@ -52,7 +52,7 @@ $artistId = $artist->getId();
               </div>
 
               <div class='trackOptions'>
-                <input type='hidden' class='songId' value='" . $albumSong->getId() ."'>
+                <input type='hidden' class='songId' value='" . $albumSong->getId() . "'>
                 <img class='optionsButton' src='assets/images/icons/more.png' onclick='showOptionsMenu(this)'>
               </div>
 

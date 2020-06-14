@@ -1,7 +1,7 @@
 <?php
 include("includes/includedFiles.php");
 
-if (isset($_GET['term'])) {
+if(isset($_GET['term'])) {
     $term = urldecode($_GET['term']); // スペースが%20になるのを消す
 } else {
     $term = "";
@@ -26,7 +26,7 @@ if (isset($_GET['term'])) {
           clearTimeout(timer);
 
           timer = setTimeout(function() {
-              let val = $(".searchInput").val();
+              var val = $(".searchInput").val();
               openPage("search.php?term=" + val);
           }, 2000);
       })
@@ -35,7 +35,7 @@ if (isset($_GET['term'])) {
 </script>
 
 <!-- 検索結果が空白ならページロードをストップ -->
-<?php if ($term == "") exit(); ?>
+<?php if($term == "") exit(); ?>
 
 <div class="tracklistContainer borderBottom">
   <h2>SONGS</h2>
@@ -44,7 +44,7 @@ if (isset($_GET['term'])) {
     <?php
     $songsQuery = mysqli_query($con, "SELECT id FROM songs WHERE title LIKE '$term%' LIMIT 10");
 
-    if (mysqli_num_rows($songsQuery) == 0) {
+    if(mysqli_num_rows($songsQuery) == 0) {
        echo "<span class='noResults'>" . $term ."に該当する曲は見つかりませんでした。</span>";
     }
 
@@ -53,7 +53,7 @@ if (isset($_GET['term'])) {
     $i = 1;
     while($row = mysqli_fetch_array($songsQuery)) {
 
-      if ($i > 15) {
+      if($i > 15) {
           break;
       }
 
@@ -74,7 +74,7 @@ if (isset($_GET['term'])) {
               </div>
 
               <div class='trackOptions'>
-                <input type='hidden' class='songId' value='" . $albumSong->getId() ."'>
+                <input type='hidden' class='songId' value='" . $albumSong->getId() . "'>
                 <img class='optionsButton' src='assets/images/icons/more.png' onclick='showOptionsMenu(this)'>
               </div>
 
@@ -102,7 +102,7 @@ if (isset($_GET['term'])) {
       <?php 
         $artistsQuery = mysqli_query($con, "SELECT id FROM artists WHERE name LIKE '$term%' LIMIT 10");
 
-        if (mysqli_num_rows($artistsQuery) == 0) {
+        if(mysqli_num_rows($artistsQuery) == 0) {
             echo "<span class='noResults'>" . $term ."に該当するアーティストは見つかりませんでした。</span>";
         }
 
@@ -112,7 +112,7 @@ if (isset($_GET['term'])) {
             echo "<div class='searchResultRow'>
                     <div class='artistName'>
 
-                        <span role='link' tabindex='0' onclick='openPage(\"artist.php?id=" . $artistFound->getId() . "\")'>
+                        <span role='link' tabindex='0' onclick='openPage(\"artist.php?id=" . $artistFound->getId() ."\")'>
                         "
                         . $artistFound->getName() .
                         "
@@ -130,7 +130,7 @@ if (isset($_GET['term'])) {
   <?php
         $albumQuery = mysqli_query($con, "SELECT * FROM albums WHERE title LIKE '$term%' LIMIT 10");
 
-        if (mysqli_num_rows($albumQuery) == 0) {
+        if(mysqli_num_rows($albumQuery) == 0) {
           echo "<span class='noResults'>" . $term ."に該当するアルバムは見つかりませんでした。</span>";
         }
 
