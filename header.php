@@ -1,17 +1,16 @@
 <?php 
 include('includes/config.php');
+include('includes/classes/User.php');
 include('includes/classes/Artist.php');
-include('includes/classes/Album.php'); // クラス内でArtistクラスをnewしているのでArtistクラスの下でincludeする
-include('includes/classes/Song.php'); // クラス内でArtistクラスとAlbumクラスをnewしているので一番下に配置
-
-// ログアウト処理
-// session_destroy();
+include('includes/classes/Album.php'); // クラス内でArtistクラスをnewしているのでArtistクラスの下でinclude
+include('includes/classes/Song.php'); // クラス内でArtistクラスとAlbumクラスをnewしているので下に配置
+include('includes/classes/Playlist.php');
 
 // ログイン処理を実行してindex.phpに訪問した場合のみ$_SESSION['userLoggedIn']が渡ってくる
 if (isset($_SESSION['userLoggedIn'])) {
-    $userLoggedIn = $_SESSION['userLoggedIn'];
-    // var_dump($userLoggedIn);
-    echo "<script>userLoggedIn = '$userLoggedIn';</script>";
+    $userLoggedIn = new User($con, $SESSION['userLoggedIn']);
+    $username = $userLoggedIn->getUsername();
+    echo "<script> userLoggedIn = '$username'; </script>";
 } else {
     header('Location: register.php');
 }
