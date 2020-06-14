@@ -1,19 +1,20 @@
-let currentPlaylist = [];
-let shufflePlaylist = [];
-let tempPlaylist = [];
-let audioElement;
-let mouseDown = false;
-let currentIndex = 0;
-let repeat = false;
-let shuffle = false;
-var userLoggedIn; // varは変数の重複を許す
-let timer;
+// varは変数の重複を許す
+var currentPlaylist = [];
+var shufflePlaylist = [];
+var tempPlaylist = [];
+var audioElement;
+var mouseDown = false;
+var currentIndex = 0;
+var repeat = false;
+var shuffle = false;
+var userLoggedIn;
+var timer;
 
 // クラスを持っていない場所をクリックしたらオプションを非表示にする
 $(document).click(function(click) {
-    let target = $(click.target);
+    var target = $(click.target);
     
-    if (!target.hasClass("item") && !target.hasClass("optionsButton")) {
+    if(!target.hasClass("item") && !target.hasClass("optionsButton")) {
         hideOptionsMenu();
     }
 });
@@ -26,7 +27,7 @@ $(window).scroll(function() {
 // オプションのセレクトボタンが変更されたら
 $(document).on("change", "select.playlist", function() {
     // このthisは、change要素=>optionを指す
-    let select = $(this);
+    var select = $(this);
 
     var playlistId = select.val();
     var songId = select.prev(".songId").val(); //prev 一つ前の要素を抽出する
@@ -34,7 +35,7 @@ $(document).on("change", "select.playlist", function() {
     $.post("includes/handlers/ajax/addToPlaylist.php", { playlistId: playlistId, songId: songId})
     .done(function(error) {
 
-        if (error != "") {
+        if(error != "") {
             alert(error);
             return;
         }
@@ -45,7 +46,7 @@ $(document).on("change", "select.playlist", function() {
 
 });
 
-function updateEmai(emailClass) {
+function updateEmail(emailClass) {
     var emailValue = $("." + emailClass).val();
 
     $.post("includes/handlers/ajax/updateEmail.php", { email: emailValue, username: userLoggedIn})
@@ -54,15 +55,15 @@ function updateEmai(emailClass) {
     });
 }
 
-function updatePassword(odlPasswordClass, newPasswordClass1, newPasswordClass2) {
-    var oldPassword = $("." + odlPasswordClass).val();
-    var newPasswordClass1 = $("." + newPasswordClass1).val();
-    var newPasswordClass2 = $("." + newPasswordClass2).val();
+function updatePassword(oldPasswordClass, newPasswordClass1, newPasswordClass2) {
+    var oldPassword = $("." + oldPasswordClass).val();
+    var newPassword1 = $("." + newPasswordClass1).val();
+    var newPassword2 = $("." + newPasswordClass2).val();
 
     $.post("includes/handlers/ajax/updatePassword.php", 
     { oldPassword: oldPassword, newPassword1: newPassword1, newPassword2: newPassword2, username: userLoggedIn})
     .done(function(response) {
-        $("." + odlPasswordClass).nextAll(".message").text(response);
+        $("." + oldPasswordClass).nextAll(".message").text(response);
     });
 }
 
@@ -75,17 +76,16 @@ function logout() {
 function openPage(url) {
 
     // ページ遷移後はtimerを切る
-    if (timer != null) {
+    if(timer != null) {
         clearTimeout(timer);
     }
 
     // indexOfは検索して見つからない場合は-1を返す
-    if (url.indexOf("?") == -1) {
+    if(url.indexOf("?") == -1) {
         url = url + "?";
     }
     // URLをユーザー名にチェンジ（通常はalbum.phpが表示）
-    let encodedUrl = encodeURI(url + "&userLoggedIn=" + userLoggedIn);
-    console.log(encodedUrl);
+    var encodedUrl = encodeURI(url + "&userLoggedIn=" + userLoggedIn);
     $("#mainContent").load(encodedUrl);
     $("body").scrollTop(0);
     history.pushState(null, null, url); // ブラウザ履歴に指定のurl追加
@@ -97,7 +97,7 @@ function removeFromPlaylist(button, playlistId) {
     $.post("includes/handlers/ajax/removeFromPlaylist.php", { playlistId: playlistId, songId: songId })
     .done(function(error) {
         
-        if (error != "") {
+        if(error != "") {
             alert(error);
             return;
         }
@@ -109,15 +109,15 @@ function removeFromPlaylist(button, playlistId) {
 
 function createPlaylist() {
     // prompt:ユーザにテキストを入力することを促すメッセージを持つダイアログを表示
-    let popup = prompt("プレイリスト名を入力してください");
+    var popup = prompt("プレイリスト名を入力してください");
 
-    if (popup != null) {
+    if(popup != null) {
         
         // $.postは$.ajaxの略記
         $.post("includes/handlers/ajax/createPlaylist.php", { name: popup, username: userLoggedIn })
         .done(function(error) {
             
-            if (error != "") {
+            if(error != "") {
                 alert(error);
                 return;
             }
@@ -128,14 +128,14 @@ function createPlaylist() {
 }
 
 function deletePlaylist(playlistId) {
-    let prompt = confirm("本当にプレイリストを削除しますか?");
+    var prompt = confirm("本当にプレイリストを削除しますか?");
 
-    if (prompt) {
+    if(prompt) {
 
         $.post("includes/handlers/ajax/deletePlaylist.php", { playlistId: playlistId })
         .done(function(error) {
             
-            if (error != "") {
+            if(error != "") {
                 alert(error);
                 return;
             }
@@ -147,39 +147,38 @@ function deletePlaylist(playlistId) {
 }
 
 function hideOptionsMenu() {
-    let menu = $(".optionsMenu");
-    if (menu.css("display") != "none") {
+    var menu = $(".optionsMenu");
+    if(menu.css("display") != "none") {
         menu.css("display", "none");
     }
 }
 
-
 // 曲の横にオプション nav class="optionsMenu"を表示する
 function showOptionsMenu(button) {
     var songId = $(button).prevAll(".songId").val();
-    let menu = $(".optionsMenu");
-    let menuWidth = menu.width();
+    var menu = $(".optionsMenu");
+    var menuWidth = menu.width();
     menu.find(".songId").val(songId);
 
-    let scrollTop = $(window).scrollTop(); // Distance from top of window to top of document
-    let elementOffset = $(button).offset().top; // Distance from top of document
+    var scrollTop = $(window).scrollTop(); //Distance from top of window to top of document
+    var elementOffset = $(button).offset().top; //Distance from top of document
 
-    let top = elementOffset - scrollTop;
-    let left = $(button).position().left;
+    var top = elementOffset - scrollTop;
+    var left = $(button).position().left;
 
-    menu.css({ "top": top + "px", "left": left - menuWidth + "px", "display": "inline"});
+    menu.css({ "top": top + "px", "left": left - menuWidth + "px", "display": "inline" });
 
 }
 
 // duration（再生時間）のフォーマット
 function formatTime(seconds) {
-    let time = Math.round(seconds);
-    let minutes = Math.floor(time / 60);
-    let secondsFormatted = time - (minutes * 60);
+    var time = Math.round(seconds);
+    var minutes = Math.floor(time / 60); //Rounds down
+    var seconds = time - (minutes * 60);
 
-    let extraZero = (secondsFormatted < 10) ? "0" : "";
+    var extraZero = (seconds < 10) ? "0" : "";
 
-    return minutes + ":" + extraZero + secondsFormatted;
+    return minutes + ":" + extraZero + seconds;
 }
 
 // 再生時間に応じてプログレスバーを変化する
@@ -187,13 +186,13 @@ function updateTimeProgressBar(audio) {
     $(".progressTime.current").text(formatTime(audio.currentTime));
     $(".progressTime.remaining").text(formatTime(audio.duration - audio.currentTime));
 
-    let progress = audio.currentTime / audio.duration * 100;
+    var progress = audio.currentTime / audio.duration * 100;
     $(".playbackBar .progress").css("width", progress + "%");
 }
 
 // ボリュームに応じてプログレスバーを変化する
 function updateVolumeProgressBar(audio) {
-    let volume = audio.volume * 100;
+    var volume = audio.volume * 100;
     $(".volumeBar .progress").css("width", volume + "%");
 }
 
@@ -212,12 +211,13 @@ function Audio() {
   });
 
   this.audio.addEventListener("canplay", function() {
-      let duration = formatTime(this.duration);
+      //'this' refers to the object that the event was called on
+      var duration = formatTime(this.duration);
       $(".progressTime.remaining").text(duration);
   });
 
-  this.audio.addEventListener("timeupdate", function() {
-      if (this.duration) {
+  this.audio.addEventListener("timeupdate", function(){
+      if(this.duration) {
           updateTimeProgressBar(this);
       }
   });
